@@ -5,6 +5,7 @@
  */
 package cf.db;
 
+import cf.bean.UserInfo;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -193,6 +194,45 @@ public class UserDB {
             ex.printStackTrace();
         }
         return isValid;
+    }
+    
+    public UserInfo getUserInfo(String longinId, String pwd){
+        Connection cnnct = null;
+        PreparedStatement pStmnt = null;
+        boolean isValid = false;
+        UserInfo user = null;
+        try{
+            cnnct = getConnection();
+            String preQueryStatement = "SELECT * FROM UserInfo WHERE login_id = ? and password = ?";
+            pStmnt = cnnct.prepareStatement(preQueryStatement);
+            pStmnt.setString(1, longinId);
+            pStmnt.setString(2, pwd);
+            ResultSet rs = null;
+            rs = pStmnt.executeQuery();
+            if(rs.next()){
+                user = new UserInfo();
+                user.setId(rs.getInt("id"));
+                user.setLoginId(rs.getString("login_id"));
+                user.setPassword(rs.getString("password"));
+                user.setUserName(rs.getString("userName"));
+                user.setSex(rs.getString("sex"));
+                user.setBirthday(rs.getString("birthday"));
+                user.setTel(rs.getInt("tel"));
+                user.setEmail(rs.getString("email"));
+                user.setAddress(rs.getString("address"));
+                user.setBonusPoints(rs.getDouble("bonusPoints"));
+            }
+            pStmnt.close();
+            cnnct.close();
+        } catch (SQLException ex){
+            while(ex != null){
+                ex.printStackTrace();
+                ex = ex.getNextException();
+            }
+        } catch (IOException ex){
+            ex.printStackTrace();
+        }
+        return user;
     }
     
     public boolean checkEmail(String email) {

@@ -17,19 +17,23 @@ public class UserInfo implements Serializable{
     String password;
     String userName;
     String sex;
-    String date;
+    String birthday;
     int tel;
     String email;
     String address;
     double bonusPoints;
 
-    public UserInfo(int id, String loginId, String password, String userName, String sex, String date, int tel, String email, String address, double bonusPoints) {
+    public UserInfo() {
+    }
+
+    
+    public UserInfo(int id, String loginId, String password, String userName, String sex, String birthday, int tel, String email, String address, double bonusPoints) {
         this.id = id;
         this.loginId = loginId;
         this.password = password;
         this.userName = userName;
         this.sex = sex;
-        this.date = date;
+        this.birthday = birthday;
         this.tel = tel;
         this.email = email;
         this.address = address;
@@ -76,13 +80,15 @@ public class UserInfo implements Serializable{
         this.sex = sex;
     }
 
-    public String getDate() {
-        return date;
+    public String getBirthday() {
+        return birthday;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
     }
+
+    
 
     public int getTel() {
         return tel;
