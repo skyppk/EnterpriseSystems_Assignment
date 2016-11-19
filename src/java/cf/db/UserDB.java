@@ -54,7 +54,7 @@ public class UserDB {
                     = "CREATE TABLE IF NOT EXISTS UserInfo ("
                     + "id int NOT NULL AUTO_INCREMENT,"
                     + "login_id varchar(25),"
-                    + "password varchar(25) NOT NULL,"
+                    + "password varchar(25),"
                     + "userName varchar(25) NOT NULL,"
                     + "sex varchar(1) NOT NULL,"
                     + "birthday date,"
