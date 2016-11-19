@@ -36,20 +36,20 @@ public class Registration extends HttpServlet {
             birthday = null;
         }
         
-        out.println("<html><body>"+username+tel+email+address+birthday);
+        out.println("<html><head><title>Registration</title></head><body>");
 
         UserDB db = new UserDB("jdbc:mysql://localhost:3306/ESD_Assignment", "root", "");
         if (db.checkEmail(email)) {
             out.print("success");
             if (db.addUserInfo(username, sex, birthday, tel, email, address)) {
-                out.print("Added");
+                out.print("The registration is successed.");
             } else {
-                out.print("Not added");
+                out.print("Failed");
             }
             
         } else {
-            out.print("fail");
+            out.print("The email is already existed.");
         }
-        out.println("</body></html>");
+        out.println("<p><a href=\"index.jsp\">Home Page</a></body></html>");
     }
 }
