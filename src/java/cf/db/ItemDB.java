@@ -17,17 +17,16 @@ import java.sql.Statement;
  *
  * @author apple
  */
-public class UserDB {
-    
+public class ItemDB {
     String dburl;
     String dbUser;
     String dbPassword;
     
-    public UserDB(){
+    public ItemDB(){
         
     }
     
-    public UserDB(String dburl, String dbUser, String dbPassword) {
+    public ItemDB(String dburl, String dbUser, String dbPassword) {
         this.dburl = dburl;
         this.dbUser = dbUser;
         this.dbPassword = dbPassword;
@@ -43,7 +42,7 @@ public class UserDB {
         return null;
     }
     
-       public void CreateUserInfoTable(){
+       public void CreateItemInfoTable(){
        Connection cnnct = null;
         Statement stmnt = null;
         
@@ -51,17 +50,13 @@ public class UserDB {
             cnnct = getConnection();
             stmnt = cnnct.createStatement();
             String sql
-                    = "CREATE TABLE IF NOT EXISTS UserInfo ("
+                    = "CREATE TABLE IF NOT EXISTS ItemInfo ("
                     + "id int NOT NULL AUTO_INCREMENT,"
-                    + "login_id varchar(25),"
-                    + "password varchar(25) NOT NULL,"
-                    + "userName varchar(25) NOT NULL,"
-                    + "sex varchar(1) NOT NULL,"
-                    + "birthday date,"
-                    + "tel int(8) NOT NULL,"
-                    + "email varchar(255) NOT NULL,"
-                    + "address varchar(255) NOT NULL,"
-                    + "bonusPoints double,"
+                    + "itemName varchar(50) NOT NULL,"
+                    + "descriptions varchar(255) NOT NULL,"
+                    + "category varchar(20) NOT NULL,"
+                    + "designerName varchar(30) NOT NULL,"
+                    + "price double NOT NULL,"
                     + "status varchar(15) NOT NULL,"
                     + "PRIMARY KEY (id)"
                     + ")";
@@ -78,21 +73,19 @@ public class UserDB {
         } 
     }
     
-    public boolean addUserInfo(String userName, String sex, String birthday, int tel, String email, String address ){
+    public boolean addItemInfo(String itemName, String descriptions, String category, String designerName, double price ){
         Connection cnnct = null;
         PreparedStatement pStmnt = null;
         boolean isSuccess = false;
         try{
             cnnct = getConnection();
-            String preQueryStatement = "INSERT INTO UserInfo VALUES (null,null,null,?,?,?,?,?,?,null,?)";
+            String preQueryStatement = "INSERT INTO UserInfo VALUES (null,?,?,?,?,?)";
             pStmnt = cnnct.prepareStatement(preQueryStatement);
-            pStmnt.setString(1, userName);
-            pStmnt.setString(2, sex);
-            pStmnt.setString(3, birthday);
-            pStmnt.setInt(4, tel);
-            pStmnt.setString(5, email);
-            pStmnt.setString(6, address);
-            pStmnt.setString(7, "New");
+            pStmnt.setString(1, itemName);
+            pStmnt.setString(2, descriptions);
+            pStmnt.setString(3, category);
+            pStmnt.setString(4, designerName);
+            pStmnt.setDouble(5, price);
             int rowCount = pStmnt.executeUpdate();
             if(rowCount >= 1){
                 isSuccess = true;
@@ -110,17 +103,19 @@ public class UserDB {
         return isSuccess;
     }
     
-    public boolean addLoginInfo(String loginId, String pwd, int id){
+    public boolean editItemInfo(String itemName, String descriptions, String category, String designerName, double price){
         Connection cnnct = null;
         PreparedStatement pStmnt = null;
         boolean isSuccess = false;
         try{
             cnnct = getConnection();
-            String preQueryStatement = "UPDATE UserInfo SET login_id = ? , password = ? , bonusPoints = 1000 WHERE id = ? ";
+            String preQueryStatement = "UPDATE UserInfo SET itemName = ? , descriptions = ? , category = ? , designerName = ? , price = ? WHERE id = ? ";
             pStmnt = cnnct.prepareStatement(preQueryStatement);
-            pStmnt.setString(1, loginId);
-            pStmnt.setString(2, pwd);
-            pStmnt.setInt(3, id);
+            pStmnt.setString(1, itemName);
+            pStmnt.setString(2, descriptions);
+            pStmnt.setString(3, category);
+            pStmnt.setString(4, designerName);
+            pStmnt.setDouble(5, price);
             int rowCount = pStmnt.executeUpdate();
             if(rowCount >= 1){
                 isSuccess = true;
@@ -167,31 +162,5 @@ public class UserDB {
 //        return isSuccess;
 //    }
     
-    public boolean isValidUser(String user, String pwd){
-        Connection cnnct = null;
-        PreparedStatement pStmnt = null;
-        boolean isValid = false;
-        try{
-            cnnct = getConnection();
-            String preQueryStatement = "SELECT * FROM UserInfo WHERE username = ? and password = ?";
-            pStmnt = cnnct.prepareStatement(preQueryStatement);
-            pStmnt.setString(1, user);
-            pStmnt.setString(2, pwd);
-            ResultSet rs = null;
-            rs = pStmnt.executeQuery();
-            if(rs.next()){
-                isValid = true;
-            }
-            pStmnt.close();
-            cnnct.close();
-        } catch (SQLException ex){
-            while(ex != null){
-                ex.printStackTrace();
-                ex = ex.getNextException();
-            }
-        } catch (IOException ex){
-            ex.printStackTrace();
-        }
-        return isValid;
-    }
+    
 }
