@@ -167,15 +167,15 @@ public class UserDB {
 //        return isSuccess;
 //    }
     
-    public boolean isValidUser(String user, String pwd){
+    public boolean isValidUser(String longinId, String pwd){
         Connection cnnct = null;
         PreparedStatement pStmnt = null;
         boolean isValid = false;
         try{
             cnnct = getConnection();
-            String preQueryStatement = "SELECT * FROM UserInfo WHERE username = ? and password = ?";
+            String preQueryStatement = "SELECT * FROM UserInfo WHERE login_id = ? and password = ?";
             pStmnt = cnnct.prepareStatement(preQueryStatement);
-            pStmnt.setString(1, user);
+            pStmnt.setString(1, longinId);
             pStmnt.setString(2, pwd);
             ResultSet rs = null;
             rs = pStmnt.executeQuery();
