@@ -6,6 +6,7 @@
 package cf.db;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -17,7 +18,7 @@ import java.sql.Statement;
  *
  * @author apple
  */
-public class ItemDB {
+public class ItemDB implements Serializable{
     String dburl;
     String dbUser;
     String dbPassword;
