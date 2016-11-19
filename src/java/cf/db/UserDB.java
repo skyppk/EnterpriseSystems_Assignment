@@ -194,4 +194,31 @@ public class UserDB {
         }
         return isValid;
     }
+    
+    public boolean checkEmail(String email) {
+        Connection cnnct = null;
+        PreparedStatement pStmnt = null;
+        boolean isValid = false;
+        try{
+            cnnct = getConnection();
+            String preQueryStatement = "SELECT * FROM UserInfo WHERE email = ?";
+            pStmnt = cnnct.prepareStatement(preQueryStatement);
+            pStmnt.setString(1, email);
+            ResultSet rs = null;
+            rs = pStmnt.executeQuery();
+            if(!rs.next()){
+                isValid = true;
+            }
+            pStmnt.close();
+            cnnct.close();
+        } catch (SQLException ex){
+            while(ex != null){
+                ex.printStackTrace();
+                ex = ex.getNextException();
+            }
+        } catch (IOException ex){
+            ex.printStackTrace();
+        }
+        return isValid;
+    }
 }
