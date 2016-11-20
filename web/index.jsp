@@ -13,6 +13,7 @@
         <title>JSP Page</title>
     </head>
     <body>
+        <%@include file="menu.jsp" %>
         <% if (userInfo.getLoginId()==null||userInfo.getLoginId().equals("")) {%>
             <a href="registration.jsp">Registration</a>
             <a href="login.jsp">Login</a>
