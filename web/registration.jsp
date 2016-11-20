@@ -10,26 +10,6 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Registration</title>
-        <!--        <style>
-                    div,h2 {
-                        margin: 10px;
-                        width: 100%;
-                    }
-                    input:not([type=radio]):not([type=submit]):not([type=reset]) {
-                        width: 100%;
-                        border: 1px solid black;
-                        height: 20px;
-                    }
-                    label {
-                        text-align: left;
-                        display: inline-block;
-                        width: 100%;
-                    }
-                    #form {
-                        margin:0 auto;
-                        width: 50%;
-                    }
-                </style>-->
     </head>
     <body>
         <%@include file="menu.jsp" %>
