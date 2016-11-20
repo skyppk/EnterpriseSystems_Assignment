@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<jsp:useBean id="userInfo" class="cf.bean.UserInfo" scope="session" />
 
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
@@ -46,8 +47,12 @@
                 <button type="submit" class="btn btn-default">Submit</button>
             </form>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-                <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                <% if (userInfo.getLoginId()==null||userInfo.getLoginId().equals("")) {%>
+                <li><a href="registration.jsp"><span class="glyphicon glyphicon-user"></span> Registration</a></li>
+                <li><a href="login.jsp"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                <% } else { %>
+                <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                <% } %>
             </ul>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
