@@ -37,7 +37,8 @@ public class Registration extends HttpServlet {
         }
         
         out.println("<html><head><title>Registration</title></head><body>");
-
+        req.getRequestDispatcher("/menu.jsp").include(req,resp);
+        
         UserDB db = new UserDB("jdbc:mysql://localhost:3306/ESD_Assignment", "root", "");
         if (db.checkEmail(email)) {
             if (db.addUserInfo(username, sex, birthday, tel, email, address)) {
