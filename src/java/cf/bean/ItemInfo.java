@@ -19,6 +19,10 @@ public class ItemInfo implements Serializable{
     String designerName;
     double price;
 
+    public ItemInfo() {
+    }
+
+    
     public ItemInfo(int id, String itemName, String descriptions, String category, String designerName, double price) {
         this.id = id;
         this.itemName = itemName;
