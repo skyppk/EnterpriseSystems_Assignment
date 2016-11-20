@@ -5,6 +5,7 @@
  */
 package cf.db;
 
+import cf.bean.ItemInfo;
 import java.io.IOException;
 import java.io.Serializable;
 import java.sql.Connection;
@@ -13,6 +14,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 /**
  *
@@ -58,6 +60,7 @@ public class ItemDB implements Serializable{
                     + "category varchar(20) NOT NULL,"
                     + "designerName varchar(30) NOT NULL,"
                     + "price double NOT NULL,"
+                    + "img varchar(255) NOT NULL,"
                     + "status varchar(15) NOT NULL,"
                     + "PRIMARY KEY (id)"
                     + ")";
@@ -162,6 +165,39 @@ public class ItemDB implements Serializable{
 //        }
 //        return isSuccess;
 //    }
-    
+    public ArrayList<ItemInfo> selectAllItem(){
+        Connection cnnct = null;
+        PreparedStatement pStmnt = null;
+        ItemInfo item = null;
+        ArrayList<ItemInfo> items = new ArrayList();
+        try{
+            cnnct = getConnection();
+            String preQueryStatement = "SELECT * FROM ItemInfo ";
+            pStmnt = cnnct.prepareStatement(preQueryStatement);
+//            pStmnt.setString(1, tel);
+            ResultSet rs = null;
+            rs = pStmnt.executeQuery();
+            while(rs.next()){
+                item = new ItemInfo();
+                item.setId(rs.getInt("id"));
+                item.setItemName(rs.getString("itemName"));
+                item.setDescriptions(rs.getString("descriptions"));
+                item.setCategory(rs.getString("category"));
+                item.setDesignerName(rs.getString("designerName"));
+                item.setPrice(rs.getDouble("price"));
+                items.add(item);
+            }
+            pStmnt.close();
+            cnnct.close();
+        } catch (SQLException ex){
+            while (ex != null) {
+                ex.printStackTrace();
+                ex = ex.getNextException();
+            }
+        } catch (IOException ex){
+            ex.printStackTrace();
+        }
+        return items;
+    }
     
 }
