@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<jsp:useBean id="userInfo" class="cf.bean.UserInfo" scope="session" />
 <!DOCTYPE html>
 <html>
     <head>
@@ -12,7 +13,15 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
-        <a href="registration.jsp">Registration</a>
+        <% if (userInfo.getLoginId()==null||userInfo.getLoginId().equals("")) {%>
+            <a href="registration.jsp">Registration</a>
+            <a href="login.jsp">Login</a>
+        <% } else { %>
+        Welcome, <%=userInfo.getUserName()%><p>
+        <form method="post" action="login">
+            <input type="hidden" name="action" value="logout">
+            <input type="submit" value="Logout" name="logoutButton">
+        </form>
+        <% } %>
     </body>
 </html>

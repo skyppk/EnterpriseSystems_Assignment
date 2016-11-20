@@ -40,16 +40,17 @@ public class Registration extends HttpServlet {
 
         UserDB db = new UserDB("jdbc:mysql://localhost:3306/ESD_Assignment", "root", "");
         if (db.checkEmail(email)) {
-            out.print("success");
             if (db.addUserInfo(username, sex, birthday, tel, email, address)) {
                 out.print("The registration is successed.");
             } else {
                 out.print("Failed");
             }
-            
+            out.println("<p>It will redirect to Home Page in 3 seconds.");
+            out.println("<meta http-equiv=\"refresh\" content=\"3;url=index.jsp\" />");
+            out.println("<p>If isn't, <a href=\"index.jsp\">click here</a>.</body></html>");
         } else {
             out.print("The email is already existed.");
+            out.print("<p><a href=\"javascript:history.back()\">Back to Registration Form</a>");
         }
-        out.println("<p><a href=\"index.jsp\">Home Page</a></body></html>");
     }
 }

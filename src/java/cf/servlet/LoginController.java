@@ -63,12 +63,12 @@ public class LoginController extends HttpServlet {
         if (this.userDb.isValidUser(username, password)){
             HttpSession session = req.getSession(true);
             UserInfo user = new UserInfo();
-            user = userDb.getUserInfo(password, password);
+            user = userDb.getUserInfo(username, password);
             
             session.setAttribute("userInfo", user);
-            targetURL = "/welcome.jsp";
+            targetURL = "/index.jsp";
         } else {
-            targetURL = "/loginError.jsp";
+            targetURL = "/index.jsp"; //TODO
         }
         RequestDispatcher rd;
         rd = getServletContext().getRequestDispatcher("/" + targetURL);
@@ -85,7 +85,7 @@ public class LoginController extends HttpServlet {
     }
     
     private void doLogin(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-        String targetURL = "login.jsp";
+        String targetURL = "index.jsp";
         RequestDispatcher rd;
         rd = getServletContext().getRequestDispatcher("/" + targetURL);
         rd.forward(req, resp);
