@@ -14,6 +14,6 @@
     </head>
     <body>
         <%@include file="menu.jsp" %>
-        HELLO WORLD
+        <div class="container">HELLO WORLD</div>
     </body>
 </html>

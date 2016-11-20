@@ -57,4 +57,4 @@
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>
-<div style="margin-top:70px"></div>
+<div style="margin-top:60px"></div>
