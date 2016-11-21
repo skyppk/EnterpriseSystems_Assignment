@@ -56,7 +56,7 @@ public class OrderDB {
                     + "deliveryAddress varchar(255),"
                     + "orderStatus varchar(25)"
                     + "PRIMARY KEY (id)"
-                    + ")";
+                    + ");";
             stmnt.execute(sql);
             stmnt.close();
             cnnct.close();
