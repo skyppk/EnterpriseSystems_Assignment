@@ -10,46 +10,30 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Login</title>
-        <!--        <style>
-                    div,h2 {
-                        margin: 10px;
-                        width: 100%;
-                    }
-                    input {
-                        width: 100%;
-                        border: 1px solid black;
-                        height: 20px;
-                    }
-                    label {
-                        text-align: left;
-                        display: inline-block;
-                        width: 100%;
-                    }
-                    #form {
-                        margin:0 auto;
-                        width: 50%;
-                    }
-                </style>-->
     </head>
     <body>
         <%@include file="menu.jsp" %>
         <div class="container">
             <h2>Login</h2>
-            <form method="post" action="login">
-                <input type="hidden" name="action" value="authenticate">
-                <div class="form-group">
-                    <label for="username">Username:</label>
-                    <input type="text" class="form-control" id="username" name="username" required>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <form method="post" action="login">
+                        <input type="hidden" name="action" value="authenticate">
+                        <div class="form-group">
+                            <label for="username">Username:</label>
+                            <input type="text" class="form-control" id="username" name="username" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password:</label>
+                            <input type="password" class="form-control" id="password" name="password" required>
+                        </div>
+                        <div class="checkbox">
+                            <label><input type="checkbox"> Remember me</label>
+                        </div>
+                        <button type="submit" class="btn btn-default">Submit</button>
+                    </form>
                 </div>
-                <div class="form-group">
-                    <label for="password">Password:</label>
-                    <input type="password" class="form-control" id="password" name="password" required>
-                </div>
-                <div class="checkbox">
-                    <label><input type="checkbox"> Remember me</label>
-                </div>
-                <button type="submit" class="btn btn-default">Submit</button>
-            </form>
+            </div>
         </div>
     </body>
 </html>
