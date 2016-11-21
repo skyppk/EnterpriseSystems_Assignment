@@ -11,41 +11,31 @@ import java.io.Serializable;
  *
  * @author apple
  */
-public class UserInfo implements Serializable{
+public class StaffInfo implements Serializable{
     int id;
     String loginId;
     String password;
     String lastName;
     String firstName;
     String sex;
-    String birthday;
     String tel;
-    String address;
     String email;
-    String userStatus;
-    double money;
-    int creditAmount;
-    double bonusPoints;
+    String position;
     String accountType;
 
-    public UserInfo() {
+    public StaffInfo() {
     }
 
-    public UserInfo(int id, String loginId, String password, String lastName, String firstName, String sex, String birthday, String tel, String address, String email, String userStatus, double money, int creditAmount, double bonusPoints, String accountType) {
+    public StaffInfo(int id, String loginId, String password, String lastName, String firstName, String sex, String tel, String email, String position, String accountType) {
         this.id = id;
         this.loginId = loginId;
         this.password = password;
         this.lastName = lastName;
         this.firstName = firstName;
         this.sex = sex;
-        this.birthday = birthday;
         this.tel = tel;
-        this.address = address;
         this.email = email;
-        this.userStatus = userStatus;
-        this.money = money;
-        this.creditAmount = creditAmount;
-        this.bonusPoints = bonusPoints;
+        this.position = position;
         this.accountType = accountType;
     }
 
@@ -97,28 +87,12 @@ public class UserInfo implements Serializable{
         this.sex = sex;
     }
 
-    public String getBirthday() {
-        return birthday;
-    }
-
-    public void setBirthday(String birthday) {
-        this.birthday = birthday;
-    }
-
     public String getTel() {
         return tel;
     }
 
     public void setTel(String tel) {
         this.tel = tel;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
     }
 
     public String getEmail() {
@@ -129,36 +103,12 @@ public class UserInfo implements Serializable{
         this.email = email;
     }
 
-    public String getUserStatus() {
-        return userStatus;
+    public String getPosition() {
+        return position;
     }
 
-    public void setUserStatus(String userStatus) {
-        this.userStatus = userStatus;
-    }
-
-    public double getMoney() {
-        return money;
-    }
-
-    public void setMoney(double money) {
-        this.money = money;
-    }
-
-    public int getCreditAmount() {
-        return creditAmount;
-    }
-
-    public void setCreditAmount(int creditAmount) {
-        this.creditAmount = creditAmount;
-    }
-
-    public double getBonusPoints() {
-        return bonusPoints;
-    }
-
-    public void setBonusPoints(double bonusPoints) {
-        this.bonusPoints = bonusPoints;
+    public void setPosition(String position) {
+        this.position = position;
     }
 
     public String getAccountType() {
@@ -168,6 +118,6 @@ public class UserInfo implements Serializable{
     public void setAccountType(String accountType) {
         this.accountType = accountType;
     }
- 
+    
     
 }

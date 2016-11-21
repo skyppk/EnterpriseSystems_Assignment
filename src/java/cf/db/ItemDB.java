@@ -7,7 +7,6 @@ package cf.db;
 
 import cf.bean.ItemInfo;
 import java.io.IOException;
-import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -55,14 +54,14 @@ public class ItemDB {
             String sql
                     = "CREATE TABLE IF NOT EXISTS ItemInfo ("
                     + "id int NOT NULL AUTO_INCREMENT,"
-                    + "itemId varchar(30) NOT NULL,"
-                    + "itemName varchar(50) NOT NULL,"
-                    + "descriptions varchar(255) NOT NULL,"
+                    + "item_id varchar(30) NOT NULL,"
+                    + "item_name varchar(50) NOT NULL,"
                     + "category varchar(20) NOT NULL,"
-                    + "designerName varchar(30) NOT NULL,"
+                    + "designer_name varchar(30) NOT NULL,"
                     + "price double NOT NULL,"
+                    + "descriptions varchar(255) NOT NULL,"                   
                     + "img varchar(255) NOT NULL,"
-                    + "status varchar(15) NOT NULL,"
+                    + "item_status varchar(15) DEFAULT 'AVAILABLE',"
                     + "PRIMARY KEY (id)"
                     + ")";
             stmnt.execute(sql);
@@ -78,19 +77,22 @@ public class ItemDB {
         } 
     }
     
-    public boolean addItemInfo(String itemName, String descriptions, String category, String designerName, double price ){
+    public boolean addItemInfo(String itemId, String itemName, String category, String designerName, double price, String descriptions, String img){
         Connection cnnct = null;
         PreparedStatement pStmnt = null;
         boolean isSuccess = false;
         try{
             cnnct = getConnection();
-            String preQueryStatement = "INSERT INTO UserInfo VALUES (null,?,?,?,?,?)";
+            String preQueryStatement = "INSERT INTO ItemInfo VALUES (null,?,?,?,?,?,?,?,DEFAULT)";
             pStmnt = cnnct.prepareStatement(preQueryStatement);
-            pStmnt.setString(1, itemName);
-            pStmnt.setString(2, descriptions);
+            pStmnt.setString(1, itemId);
+            pStmnt.setString(2, itemName);
             pStmnt.setString(3, category);
             pStmnt.setString(4, designerName);
             pStmnt.setDouble(5, price);
+            pStmnt.setString(6, descriptions);
+            pStmnt.setString(7, img);
+//            pStmnt.setString(8, "AVAILABLE");
             int rowCount = pStmnt.executeUpdate();
             if(rowCount >= 1){
                 isSuccess = true;
@@ -108,19 +110,18 @@ public class ItemDB {
         return isSuccess;
     }
     
-    public boolean editItemInfo(String itemName, String descriptions, String category, String designerName, double price){
+    public boolean editItemInfo(int id, double price , String descriptions, String itemStatus){
         Connection cnnct = null;
         PreparedStatement pStmnt = null;
         boolean isSuccess = false;
         try{
             cnnct = getConnection();
-            String preQueryStatement = "UPDATE UserInfo SET itemName = ? , descriptions = ? , category = ? , designerName = ? , price = ? WHERE id = ? ";
+            String preQueryStatement = "UPDATE ItemInfo SET price = ? , descriptions = ? , item_status =? WHERE id = ? ";
             pStmnt = cnnct.prepareStatement(preQueryStatement);
-            pStmnt.setString(1, itemName);
+            pStmnt.setDouble(1, price);
             pStmnt.setString(2, descriptions);
-            pStmnt.setString(3, category);
-            pStmnt.setString(4, designerName);
-            pStmnt.setDouble(5, price);
+            pStmnt.setString(3, itemStatus);
+            pStmnt.setInt(4, id);
             int rowCount = pStmnt.executeUpdate();
             if(rowCount >= 1){
                 isSuccess = true;
@@ -144,13 +145,12 @@ public class ItemDB {
         boolean isSuccess = false;
         try{
             cnnct = getConnection();
-            String preQueryStatement = "UPDATE ItemInfo SET descriptions = ? , category = ? , designerName = ? , price = ? WHERE id = ? ";
+            String preQueryStatement = "UPDATE ItemInfo SET price = ? , descriptions = ? , item_status = ? WHERE id = ? ";
             pStmnt = cnnct.prepareStatement(preQueryStatement);
-            pStmnt.setString(1, itemInfo.getDescriptions());
-            pStmnt.setString(2, itemInfo.getCategory());
-            pStmnt.setString(3, itemInfo.getDesignerName());
-            pStmnt.setDouble(4, itemInfo.getPrice());
-            pStmnt.setInt(5, itemInfo.getId());
+            pStmnt.setDouble(1, itemInfo.getPrice());
+            pStmnt.setString(2, itemInfo.getDescriptions());
+            pStmnt.setString(3, itemInfo.getItemStatus());
+            pStmnt.setInt(4, itemInfo.getId());
             int rowCount = pStmnt.executeUpdate();
             if(rowCount >= 1){
                 isSuccess = true;
@@ -183,11 +183,14 @@ public class ItemDB {
             while(rs.next()){
                 item = new ItemInfo();
                 item.setId(rs.getInt("id"));
-                item.setItemName(rs.getString("itemName"));
-                item.setDescriptions(rs.getString("descriptions"));
+                item.setItemId(rs.getString("item_id"));
+                item.setItemName(rs.getString("item_name"));
                 item.setCategory(rs.getString("category"));
-                item.setDesignerName(rs.getString("designerName"));
+                item.setDesignerName(rs.getString("designer_name"));
                 item.setPrice(rs.getDouble("price"));
+                item.setDescriptions(rs.getString("descriptions"));
+                item.setImg(rs.getString("img"));
+                item.setItemStatus(rs.getString("item_status"));
                 items.add(item);
             }
             pStmnt.close();
@@ -209,7 +212,7 @@ public class ItemDB {
         boolean isVaild = false;
         try{
             cnnct = getConnection();
-            String preQueryStatement = "SELECT * FROM ItemInfo WHERE itemId = ?";
+            String preQueryStatement = "SELECT * FROM ItemInfo WHERE item_id = ?";
             pStmnt = cnnct.prepareStatement(preQueryStatement);
             pStmnt.setString(1, itemId);
             ResultSet rs = null;
