@@ -91,8 +91,8 @@
 <div style="margin-top:50px"></div>
 <div class="jumbotron">
     <div class="container">
-        <h1>Bootstrap Framework</h1>
-        <p>These are examples of tabs, pills and buttons. Hover over each to see the difference.</p>
+        <h1>Classic and Fashion</h1>
+        <p></p>
     </div>
 </div>
 <div class="nav">
@@ -107,6 +107,7 @@
         </ul>
     </div>
 </div>
+<div style="margin-top:10px"></div>
 
 <!--<div class="input-group">
                 <div class="input-group-btn search-panel">
