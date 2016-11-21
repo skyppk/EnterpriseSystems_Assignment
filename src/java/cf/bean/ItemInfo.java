@@ -17,18 +17,20 @@ public class ItemInfo implements Serializable{
     String descriptions;
     String category;
     String designerName;
+    String img;
     double price;
 
     public ItemInfo() {
     }
 
     
-    public ItemInfo(int id, String itemName, String descriptions, String category, String designerName, double price) {
+    public ItemInfo(int id, String itemName, String descriptions, String category, String designerName,String img, double price) {
         this.id = id;
         this.itemName = itemName;
         this.descriptions = descriptions;
         this.category = category;
         this.designerName = designerName;
+        this.img = img;
         this.price = price;
     }
 
@@ -70,6 +72,14 @@ public class ItemInfo implements Serializable{
 
     public void setDesignerName(String designerName) {
         this.designerName = designerName;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
     }
 
     public double getPrice() {

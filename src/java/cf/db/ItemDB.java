@@ -20,7 +20,7 @@ import java.util.ArrayList;
  *
  * @author apple
  */
-public class ItemDB implements Serializable{
+public class ItemDB {
     String dburl;
     String dbUser;
     String dbPassword;
@@ -55,6 +55,7 @@ public class ItemDB implements Serializable{
             String sql
                     = "CREATE TABLE IF NOT EXISTS ItemInfo ("
                     + "id int NOT NULL AUTO_INCREMENT,"
+                    + "itemId varchar(30) NOT NULL,"
                     + "itemName varchar(50) NOT NULL,"
                     + "descriptions varchar(255) NOT NULL,"
                     + "category varchar(20) NOT NULL,"
@@ -137,34 +138,36 @@ public class ItemDB implements Serializable{
         return isSuccess;
     }
     
-//    public boolean editRecord(CustomerBean cb){
-//        Connection cnnct = null;
-//        PreparedStatement pStmnt = null;
-//        boolean isSuccess = false;
-//        try{
-//            cnnct = getConnection();
-//            String preQueryStatement = "UPDATE CUSTOMER SET name = ? , tel = ? , age = ? WHERE custId = ? ";
-//            pStmnt = cnnct.prepareStatement(preQueryStatement);
-//            pStmnt.setString(1, cb.getName());
-//            pStmnt.setString(2, cb.getTel());
-//            pStmnt.setInt(3, cb.getAge());
-//            pStmnt.setString(4, cb.getCustid());
-//            int rowCount = pStmnt.executeUpdate();
-//            if(rowCount >= 1){
-//                isSuccess = true;
-//            }
-//            pStmnt.close();
-//            cnnct.close();
-//        } catch (SQLException ex){
-//            while(ex != null){
-//                ex.printStackTrace();
-//                ex = ex.getNextException();
-//            }
-//        } catch (IOException ex){
-//            ex.printStackTrace();
-//        }
-//        return isSuccess;
-//    }
+    public boolean editItemInfo(ItemInfo itemInfo){
+        Connection cnnct = null;
+        PreparedStatement pStmnt = null;
+        boolean isSuccess = false;
+        try{
+            cnnct = getConnection();
+            String preQueryStatement = "UPDATE ItemInfo SET descriptions = ? , category = ? , designerName = ? , price = ? WHERE id = ? ";
+            pStmnt = cnnct.prepareStatement(preQueryStatement);
+            pStmnt.setString(1, itemInfo.getDescriptions());
+            pStmnt.setString(2, itemInfo.getCategory());
+            pStmnt.setString(3, itemInfo.getDesignerName());
+            pStmnt.setDouble(4, itemInfo.getPrice());
+            pStmnt.setInt(5, itemInfo.getId());
+            int rowCount = pStmnt.executeUpdate();
+            if(rowCount >= 1){
+                isSuccess = true;
+            }
+            pStmnt.close();
+            cnnct.close();
+        } catch (SQLException ex){
+            while(ex != null){
+                ex.printStackTrace();
+                ex = ex.getNextException();
+            }
+        } catch (IOException ex){
+            ex.printStackTrace();
+        }
+        return isSuccess;
+    }
+    
     public ArrayList<ItemInfo> selectAllItem(){
         Connection cnnct = null;
         PreparedStatement pStmnt = null;
@@ -198,6 +201,33 @@ public class ItemDB implements Serializable{
             ex.printStackTrace();
         }
         return items;
+    }
+    
+    public boolean checkItemId(String itemId){
+        Connection cnnct = null;
+        PreparedStatement pStmnt = null;
+        boolean isVaild = false;
+        try{
+            cnnct = getConnection();
+            String preQueryStatement = "SELECT * FROM ItemInfo WHERE itemId = ?";
+            pStmnt = cnnct.prepareStatement(preQueryStatement);
+            pStmnt.setString(1, itemId);
+            ResultSet rs = null;
+            rs = pStmnt.executeQuery();
+            while(rs.next()){
+                isVaild = true;
+            }
+            pStmnt.close();
+            cnnct.close();
+        } catch (SQLException ex){
+            while (ex != null) {
+                ex.printStackTrace();
+                ex = ex.getNextException();
+            }
+        } catch (IOException ex){
+            ex.printStackTrace();
+        }
+        return isVaild;
     }
     
 }
