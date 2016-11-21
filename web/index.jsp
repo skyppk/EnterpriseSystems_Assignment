@@ -14,6 +14,10 @@
     </head>
     <body>
         <%@include file="menu.jsp" %>
-        <div class="container">HELLO WORLD</div>
+        <div class="container">
+        <%
+        
+        %>
+        </div>
     </body>
 </html>
