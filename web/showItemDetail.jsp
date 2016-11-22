@@ -75,13 +75,13 @@
                 });
                 
                 function addToCart(obj){
-                    tmpstr = getCookie('shoppingCart');
+                    tmpstr = atob(getCookie('shoppingCart'));
                     shoppingCart = [];
                     if(tmpstr != '')
                         shoppingCart = JSON.parse(tmpstr);
                     console.log(shoppingCart);
                     shoppingCart.push(obj);
-                    setCookie('shoppingCart', JSON.stringify(shoppingCart), 365);
+                    setCookie('shoppingCart', btoa(JSON.stringify(shoppingCart)), 365);
                 }
             });
             function getCookie(cname) {
