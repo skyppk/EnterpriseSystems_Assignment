@@ -305,16 +305,24 @@ public class ItemDB {
         return item;
     }
     
-    public ArrayList<ItemInfo> searchItem(String search) {
+    public ArrayList<ItemInfo> searchItemByInput(String input) {
         Connection cnnct = null;
         PreparedStatement pStmnt = null;
         ItemInfo item = null;
         ArrayList<ItemInfo> items = new ArrayList();
+        String search = "%"+input+"%";
         try {
             cnnct = getConnection();
-            String preQueryStatement = "SELECT * FROM ItemInfo WHERE item_name LIKE '%?%' AND item_status = 'AVAILABLE';";
+            String preQueryStatement = "SELECT * FROM ItemInfo WHERE item_name LIKE '%%' OR category LIKE '%%' OR designer_name LIKE '%%' OR price LIKE '%%' AND item_status = 'AVAILABLE';";
             pStmnt = cnnct.prepareStatement(preQueryStatement);
-            pStmnt.setString(1, search);
+//            pStmnt.setString(1, "%" + input + "%");
+//            pStmnt.setString(2, "%" + input + "%");
+//            pStmnt.setString(3, "%" + input + "%");
+//            pStmnt.setString(4, "%" + input + "%");
+//            pStmnt.setString(1, search);
+//            pStmnt.setString(2, search);
+//            pStmnt.setString(3, search);
+//            pStmnt.setString(4, search);
             ResultSet rs = null;
             rs = pStmnt.executeQuery();
             
