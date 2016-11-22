@@ -99,10 +99,10 @@
     <div class="container">
         <ul class="nav nav-tabs">
             <li><a href="index.jsp">Home</a></li>
-            <li><a href"#">Events</a></li>
-            <li><a href"#">Adventures</a></li>
-            <li><a href"#">Promotions</a></li>
-            <li><a href"#">Updates</a></li>
+            <li><a href="">Events</a></li>
+            <li><a href="">Adventures</a></li>
+            <li><a href="">Promotions</a></li>
+            <li><a href="">Updates</a></li>
 
         </ul>
     </div>
