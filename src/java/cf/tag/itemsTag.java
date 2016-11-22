@@ -6,8 +6,8 @@
 package cf.tag;
 
 import cf.bean.ItemInfo;
-import cf.db.ItemDB;
 import java.io.IOException;
+import java.util.ArrayList;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.PageContext;
@@ -19,26 +19,36 @@ import javax.servlet.jsp.tagext.SimpleTagSupport;
  */
 public class itemsTag extends SimpleTagSupport {
 
-    private String tagType;
+    private ArrayList<ItemInfo> items;
+//    private String tagType;
 
-    public void setTagType(String tagType) {
-        this.tagType = tagType;
+    public void setItems(ArrayList<ItemInfo> items) {
+        this.items = items;
     }
 
+//    public void setTagType(String tagType) {
+//        this.tagType = tagType;
+//    }
     @Override
     public void doTag() throws JspException, IOException {
         try {
             PageContext pageContext = (PageContext) getJspContext();
             JspWriter out = pageContext.getOut();
-            ItemDB db = new ItemDB();
-            ItemInfo item = new ItemInfo();
-            if ("all".equalsIgnoreCase(tagType)) {
-                
-            } else if ("list".equalsIgnoreCase(tagType)) {
-                
-                
-            } else {
-                out.println("No such type");
+
+            if (items != null) {
+                for (ItemInfo item : items) {
+                    out.println("<div class=\"col-sm-6 col-md-4\">");
+                    out.println("<div class=\"thumbnail\">");
+                    out.println("<a href=\"product?action=detail&name="+item.getItemName()+"\">");
+                    out.println("<img src=\"img/"+item.getImg()+"\" alt=\"No image\">");
+                    out.println("<div class=\"caption\">");
+                    out.println("<h4 style=\"white-space: nowrap; text-overflow: ellipsis; overflow:hidden;\">"+item.getItemName()+"</h4>");
+                    out.println("<p><%=item.getPrice()%></p>");
+                    out.println("</div>");
+                    out.println("</a>");
+                    out.println("</div>");
+                    out.println("</div>");
+                }
             }
         } catch (IOException ioe) {
             System.out.println("Error generating prime: " + ioe);
