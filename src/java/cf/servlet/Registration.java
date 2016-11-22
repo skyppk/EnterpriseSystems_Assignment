@@ -18,30 +18,31 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author nanasemaru
  */
-@WebServlet(name="Registration", urlPatterns={"/registration"})
+@WebServlet(name = "Registration", urlPatterns = {"/registration"})
 public class Registration extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
         PrintWriter out = resp.getWriter();
-        String username = req.getParameter("username");
+        String firstName = req.getParameter("firstName");
+        String lastName = req.getParameter("lastName");
         String sex = req.getParameter("sex");
-        int tel = Integer.parseInt(req.getParameter("tel"));
+        String tel = req.getParameter("tel");
         String email = req.getParameter("email");
         String address = req.getParameter("address");
         String birthday = req.getParameter("birthday");
-        
+
         if (birthday.equals("")) {
             birthday = null;
         }
-        
+
         out.println("<html><head><title>Registration</title></head><body>");
-        req.getRequestDispatcher("/menu.jsp").include(req,resp);
-        
+        req.getRequestDispatcher("/menu.jsp").include(req, resp);
+
         UserDB db = new UserDB("jdbc:mysql://localhost:3306/ESD_Assignment", "root", "");
         if (db.checkEmail(email)) {
-            if (db.addUserInfo(username, sex, birthday, tel, email, address)) {
+            if (db.addUserInfo(lastName, firstName, sex, birthday, tel, address, email)) {
                 out.print("The registration is successed.");
             } else {
                 out.print("Failed");

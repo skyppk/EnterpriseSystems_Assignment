@@ -20,8 +20,18 @@
                     <form method="post" action="registration">
                         <div style="text-align: right;">*Required</div>
                         <div class="form-group">
-                            <label for="username">*Name:</label>
-                            <input type="text" class="form-control" id="username" name="username" required>
+                            <label for="firstName">*Name:</label>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div>
+                                        <input type="text" class="form-control" id="firstName" name="firstName" placeholder="First Name" required>
+                                    </div><!-- /input-group -->
+                                </div><!-- /.col-lg-6 -->
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Last Name" required>
+                                </div><!-- /.col-lg-6 -->
+                            </div><!-- /.row -->
+
                         </div>
                         <div class="form-group">
                             <label for="sex">*Sex:</label><br>

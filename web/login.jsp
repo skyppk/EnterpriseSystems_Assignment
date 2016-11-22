@@ -20,7 +20,7 @@
                     <form method="post" action="login">
                         <input type="hidden" name="action" value="authenticate">
                         <div class="form-group">
-                            <label for="username">Username:</label>
+                            <label for="username">Userame:</label>
                             <input type="text" class="form-control" id="username" name="username" required>
                         </div>
                         <div class="form-group">

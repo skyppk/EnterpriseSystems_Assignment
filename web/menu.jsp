@@ -73,7 +73,7 @@
             <% } else {%>
 
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">Welcome, <%=userInfo.getUserName()%></a></li>
+                <li><a href="#">Welcome, <%=userInfo.getFirstName()%></a></li>
                 <li><a href="#">Bonus Point: <%=userInfo.getBonusPoints()%></a></li>
                 <li>
                     <form method="post" action="login" class="navbar-form">

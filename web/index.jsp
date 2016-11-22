@@ -13,7 +13,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>C & F</title>
     </head>
     <body>
         <%@include file="menu.jsp" %>
@@ -23,17 +23,23 @@
                     ItemDB db = new ItemDB("jdbc:mysql://localhost:3306/ESD_Assignment", "root", "");
                     ArrayList<ItemInfo> items = db.selectAllItem();
                     for (ItemInfo item : items) {
+                        if (item.getItemStatus().equalsIgnoreCase("AVAILABLE")) {
                 %>
                 <div class="col-sm-6 col-md-4">
                     <div class="thumbnail">
-                        <img src="img/<%=item.getImg()%>" alt="No image">
-                        <div class="caption">
-                            <h3><%=item.getItemName()%></h3>
-                            <p><%=item.getPrice()%></p>
-                        </div>
+                        <a href="product?action=detail&item=<%=item.getItemName()%>">
+                            <img src="img/<%=item.getImg()%>" alt="No image">
+                            <div class="caption">
+                                <h4 style="white-space: nowrap; text-overflow: ellipsis; overflow:hidden;"><%=item.getItemName()%></h4>
+                                <p><%=item.getPrice()%></p>
+                            </div>
+                        </a>
                     </div>
                 </div>
-                <% }%>
+                <%
+                        }
+                    }
+                %>
             </div>
         </div>
     </body>
