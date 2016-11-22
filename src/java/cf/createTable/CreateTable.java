@@ -16,9 +16,11 @@ import cf.db.UserDB;
 public class CreateTable {
 
     public static void main(String[] arg) {
-        String url = "jdbc:mysql://localhost:3306/ESD_Assignment";
+//        String url = "jdbc:mysql://localhost:3306/ESD_Assignment";
+        String url = "jdbc:mysql://dev16.asuscomm.com:3306/ESD_Assignment";
         String username = "root";
-        String password = "";
+//        String password = "";
+        String password = "root";
         UserDB userDb = new UserDB(url, username, password);
         ItemDB itemDb = new ItemDB(url, username, password);
         OrderDB orderDb = new OrderDB(url, username, password);

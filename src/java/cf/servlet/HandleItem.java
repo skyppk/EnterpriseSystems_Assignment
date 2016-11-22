@@ -27,9 +27,9 @@ public class HandleItem extends HttpServlet {
     private ItemDB db;
 
     public void init() {
-        String dbUser = this.getServletContext().getInitParameter("dbUser2");
-        String dbPassword = this.getServletContext().getInitParameter("dbPassword2");
-        String dbUrl = this.getServletContext().getInitParameter("dbUrl2");
+        String dbUser = this.getServletContext().getInitParameter("dbUser");
+        String dbPassword = this.getServletContext().getInitParameter("dbPassword");
+        String dbUrl = this.getServletContext().getInitParameter("dbUrl");
 
         db = new ItemDB(dbUrl, dbUser, dbPassword);
     }
