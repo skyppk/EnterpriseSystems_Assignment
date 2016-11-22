@@ -23,8 +23,9 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(urlPatterns = {"/product"})
 public class HandleItem extends HttpServlet {
+
     private ItemDB db;
-    
+
     public void init() {
         String dbUser = this.getServletContext().getInitParameter("dbUser2");
         String dbPassword = this.getServletContext().getInitParameter("dbPassword2");
@@ -32,7 +33,7 @@ public class HandleItem extends HttpServlet {
 
         db = new ItemDB(dbUrl, dbUser, dbPassword);
     }
-    
+
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
@@ -48,9 +49,13 @@ public class HandleItem extends HttpServlet {
         String action = request.getParameter("action");
         String name = request.getParameter("name");
         if ("all".equalsIgnoreCase(action)) {
-            
+            ArrayList<ItemInfo> items = db.selectAvailableItem();
+            request.setAttribute("items", items);
+            RequestDispatcher rd;
+            rd = getServletContext().getRequestDispatcher("/showItems.jsp");
+            rd.forward(request, response);
         } else if ("detail".equalsIgnoreCase(action)) {
-            if (name!=null) {
+            if (name != null) {
                 ItemInfo item = db.queryItemDetail(name);
                 request.setAttribute("item", item);
                 RequestDispatcher rd;
