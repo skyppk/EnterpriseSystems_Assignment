@@ -93,6 +93,7 @@ public class UserDB {
                     + "money double DEFAULT '0',"
                     + "credit_amount int DEFAULT '0',"
                     + "bonus_point double DEFAULT '1000',"
+                    + "account_type varchar(20) DEFAULT 'CUSTOMER',"
                     + "PRIMARY KEY (login_id)"
                     + ")";
             stmnt.execute(sql);
@@ -141,6 +142,39 @@ public class UserDB {
         return isSuccess;
     }
 
+    public boolean addUserAccountInfo(int id, String loginId,String password) {
+        Connection cnnct = null;
+        Statement stmt = null;
+        boolean isSuccess = false;
+        try {
+            cnnct = getConnection();
+            cnnct.setAutoCommit(false);
+            stmt = cnnct.createStatement();
+            stmt.addBatch("UPDATE UserInfo SET login_id = '" + loginId + "' WHERE id = '" + id + "'");
+            stmt.addBatch("INSERT INTO AccountInfo VALUES ( '" + loginId + "','" + password + "',DEFAULT,DEFAULT,DEFAULT,DEFAULT)");
+            int counts[] = stmt.executeBatch();
+            cnnct.commit();
+            System.out.println("Committed " + counts.length);
+            stmt.close();
+            cnnct.close();
+        } catch (SQLException ex) {
+            if(cnnct != null){
+                try{
+                    cnnct.rollback();
+                }catch(SQLException ex1){
+                    ex1.printStackTrace();
+                }
+            }
+            while (ex != null) {
+                ex.printStackTrace();
+                ex = ex.getNextException();
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        return isSuccess;
+    }
+    
 //    public boolean addLoginInfo(String loginId, String pwd, int id) {
 //        Connection cnnct = null;
 //        PreparedStatement pStmnt = null;

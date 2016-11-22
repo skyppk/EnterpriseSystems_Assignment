@@ -22,11 +22,11 @@ public class CreateTable {
         UserDB userDb = new UserDB(url, username, password);
         ItemDB itemDb = new ItemDB(url, username, password);
         OrderDB orderDb = new OrderDB(url, username, password);
-//        userDb.dropUserInfoTable();
-//        userDb.dropAccountInfoTable();
-//        itemDb.dropItemInfoTable();
-//        orderDb.dropOrderInfoTable();
-//        orderDb.dropOrderDetailsTable();
+        userDb.dropUserInfoTable();
+        userDb.dropAccountInfoTable();
+        itemDb.dropItemInfoTable();
+        orderDb.dropOrderInfoTable();
+        orderDb.dropOrderDetailsTable();
         userDb.CreateUserInfoTable();
         itemDb.CreateItemInfoTable();
         userDb.CreateAccountInfoTable();
@@ -47,7 +47,7 @@ public class CreateTable {
 //        addUserInfo(String lastName,String firstName, String sex, String birthday, int tel, String address, String email)
 
         userDb.addUserInfo("Wong", "Shuk Yan", "F", "1995-9-2", "34329483", "pig street", "sywispig@gmail.com");
-
+        userDb.addUserAccountInfo(1, "ting", "ting");
 //        addOrderInfo(String orderId, String loginId, String deliveryType, String deliverDate, String deliveryTime, String deliveryAddress, double orderPrice)
 
         orderDb.addOrderInfo("o1", "syw", "prick", "2034-4-4", "PM", "pig street", 999.4);
