@@ -59,6 +59,7 @@ public class StaffDB {
                     + "tel varchar(8) NOT NULL,"
                     + "email varchar(255) NOT NULL,"
                     + "position varchar(20) NOT NULL,"
+                    + "UNIQUE (email),"
                     + "PRIMARY KEY (id)"
                     + ")";
             stmnt.execute(sql);

@@ -62,6 +62,7 @@ public class ItemDB {
                     + "descriptions varchar(255) NOT NULL,"                   
                     + "img varchar(255) NOT NULL,"
                     + "item_status varchar(15) DEFAULT 'AVAILABLE',"
+                    + "UNIQUE (item_id),"
                     + "PRIMARY KEY (id)"
                     + ")";
             stmnt.execute(sql);

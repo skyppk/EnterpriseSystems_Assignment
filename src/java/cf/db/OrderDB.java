@@ -59,6 +59,7 @@ public class OrderDB {
                     + "order_price double NOT NULL,"
                     + "order_date DateTime DEFAULT CURRENT_TIMESTAMP,"
                     + "order_status varchar(15) DEFAULT 'WAITING',"
+                    + "UNIQUE (order_id),"
                     + "PRIMARY KEY (id)"
                     + ");";
             stmnt.execute(sql);

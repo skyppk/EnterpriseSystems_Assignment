@@ -22,8 +22,9 @@
                 <%
                     ItemDB db = new ItemDB("jdbc:mysql://localhost:3306/ESD_Assignment", "root", "");
                     ArrayList<ItemInfo> items = db.selectAllItem();
-                    for (ItemInfo item : items) {
-                        if (item.getItemStatus().equalsIgnoreCase("AVAILABLE")) {
+                    if (items != null) {
+                        for (ItemInfo item : items) {
+                            if (item.getItemStatus().equalsIgnoreCase("AVAILABLE")) {
                 %>
                 <div class="col-sm-6 col-md-4">
                     <div class="thumbnail">
@@ -37,6 +38,7 @@
                     </div>
                 </div>
                 <%
+                            }
                         }
                     }
                 %>

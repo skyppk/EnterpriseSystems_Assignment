@@ -63,6 +63,7 @@ public class UserDB {
                     + "address varchar(255) NOT NULL,"
                     + "email varchar(255) NOT NULL,"
                     + "user_status varchar(15) DEFAULT 'NEW',"
+                    + "UNIQUE (email),"
                     + "PRIMARY KEY (id)"
                     + ")";
             stmnt.execute(sql);
