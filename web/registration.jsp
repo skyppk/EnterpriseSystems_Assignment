@@ -10,54 +10,54 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Registration</title>
-        <style>
-            div {
-                margin: 10px;
-                width: 50%;
-            }
-            input {
-                width: 100%;
-            }
-            label {
-                text-align: left;
-            }
-            form {
-                vertical-align: middle;
-            }
-        </style>
     </head>
     <body>
-        <h2>Registration Form</h2>
-        <form method="post" action="registration">
-            <div style="text-align: right;">*Required</div>
-            <div>
-                <label for="username">Name *</label><br>
-                <input type="text" name="username" required>
+        <%@include file="menu.jsp" %>
+        <div class="container">
+            <h2>Registration Form</h2>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <form method="post" action="registration">
+                        <div style="text-align: right;">*Required</div>
+                        <div class="form-group">
+                            <label for="firstName">*Name:</label>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div>
+                                        <input type="text" class="form-control" id="firstName" name="firstName" placeholder="First Name" required>
+                                    </div><!-- /input-group -->
+                                </div><!-- /.col-lg-6 -->
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Last Name" required>
+                                </div><!-- /.col-lg-6 -->
+                            </div><!-- /.row -->
+
+                        </div>
+                        <div class="form-group">
+                            <label for="sex">*Sex:</label><br>
+                            <input type="radio" name="sex" value="M" checked> Male
+                            <input type="radio" name="sex" value="F"> Female
+                        </div>
+                        <div class="form-group">
+                            <label for="tel">*Telephone Number:</label>
+                            <input type="tel" class="form-control" id="tel" name="tel" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">*Email:</label>
+                            <input type="email" class="form-control" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="address">*Delivery Address:</label>
+                            <input type="address" class="form-control" id="address" name="address" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="birthday">Birthday:</label>
+                            <input type="date" class="form-control" id="birthday" name="birthday">
+                        </div>
+                        <button type="submit" class="btn btn-default">Submit</button>
+                    </form>
+                </div>
             </div>
-            <div>
-                <label for="sex">Sex *</label><br>
-                <input type="radio" name="sex" value="M" checked>Male
-                <input type="radio" name="sex" value="F">Female
-            </div>
-            <div>
-                <label for="tel">Telephone Number *</label><br>
-                <input type="tel" name="tel" required>
-            </div>
-            <div>
-                <label for="email">Email *</label><br>
-                <input type="email" name="email" required>
-            </div>
-            <div>
-                <label for="address">Delivery Address *</label><br>
-                <input type="text" name="address" required>
-            </div>
-            <div>
-                <label for="birthday">Birthday</label><br>
-                <input type="date" name="birthday">
-            </div>
-            <div>
-                <input type="submit" style="width: 50%"><input type="reset" style="width: 50%">
-            </div>
-        </form>
+        </div>
     </body>
 </html>

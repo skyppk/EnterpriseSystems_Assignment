@@ -7,7 +7,7 @@
     
     <context-param>
         <param-name>dbUrl</param-name> 
-        <param-value>jdbc:mysql://localhost:3306/ESD_Assignment</param-value>
+        <param-value>jdbc:mysql://dev16.asuscomm.com:3306/ESD_Assignment</param-value>
     </context-param> 
     <context-param>
         <param-name>dbUser</param-name>
@@ -15,6 +15,18 @@
     </context-param>
     <context-param>
         <param-name>dbPassword</param-name>
+        <param-value>root</param-value> 
+    </context-param>
+    <context-param>
+        <param-name>dbUrl2</param-name> 
+        <param-value>jdbc:mysql://localhost:3306/ESD_Assignment</param-value>
+    </context-param> 
+    <context-param>
+        <param-name>dbUser2</param-name>
+        <param-value>root</param-value> 
+    </context-param>
+    <context-param>
+        <param-name>dbPassword2</param-name>
         <param-value></param-value> 
     </context-param>
     <session-config>
