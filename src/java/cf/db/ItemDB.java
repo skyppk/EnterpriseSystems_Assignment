@@ -233,4 +233,36 @@ public class ItemDB {
         return isVaild;
     }
     
+    public ItemInfo queryItemDetail(String name) {
+        Connection cnnct = null;
+        PreparedStatement pStmnt = null;
+        ItemInfo item = null;
+        try {
+            cnnct = getConnection();
+            String preQueryStatement = "SELECT * FROM ItemInfo WHERE item_name = ?";
+            pStmnt = cnnct.prepareStatement(preQueryStatement);
+            pStmnt.setString(1, name);
+            ResultSet rs = null;
+            rs = pStmnt.executeQuery();
+            if (rs.next()) {
+                item = new ItemInfo();
+                item.setCategory(rs.getString("category"));
+                item.setDescriptions(rs.getString("descriptions"));
+                item.setDesignerName(rs.getString("designer_name"));
+                item.setImg(rs.getString("img"));
+                item.setItemName(rs.getString("item_name"));
+                item.setPrice(rs.getDouble("price"));
+            }
+            pStmnt.close();
+            cnnct.close();
+        } catch (SQLException ex) {
+            while (ex != null) {
+                ex.printStackTrace();
+                ex = ex.getNextException();
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        return item;
+    }
 }

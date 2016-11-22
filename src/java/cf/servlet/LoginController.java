@@ -26,9 +26,9 @@ public class LoginController extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
-        String dbUser = this.getServletContext().getInitParameter("dbUser");
-        String dbPassword = this.getServletContext().getInitParameter("dpPassword");
-        String dbUrl = this.getServletContext().getInitParameter("dbUrl");
+        String dbUser = this.getServletContext().getInitParameter("dbUser2");
+        String dbPassword = this.getServletContext().getInitParameter("dpPassword2");
+        String dbUrl = this.getServletContext().getInitParameter("dbUrl2");
         
         userDb = new UserDB(dbUrl, dbUser, dbPassword);
     }

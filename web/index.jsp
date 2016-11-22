@@ -27,7 +27,7 @@
                 %>
                 <div class="col-sm-6 col-md-4">
                     <div class="thumbnail">
-                        <a href="product?action=detail&item=<%=item.getItemName()%>">
+                        <a href="product?action=detail&name=<%=item.getItemName()%>">
                             <img src="img/<%=item.getImg()%>" alt="No image">
                             <div class="caption">
                                 <h4 style="white-space: nowrap; text-overflow: ellipsis; overflow:hidden;"><%=item.getItemName()%></h4>
