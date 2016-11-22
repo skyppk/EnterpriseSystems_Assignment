@@ -20,11 +20,35 @@
             %>
             <div class="row">
                 <div class="col-md-6">
+
                     <div class="thumbnail">
-                            <img class="" src="img/<%=item.getImg()%>" alt="No Image">
+                        <img src="img/<%=item.getImg()%>" alt="No Image">
                     </div>
                 </div>
-                    <div class="container">sdgsdg</div>
+                <div class="col-md-offset-7">
+                    <h2><%=item.getItemName()%></h2>
+                    <blockquote>
+                        <p>Designed by <%=item.getDesignerName()%></p>
+                    </blockquote>
+                    <p class="lead">$ <%=item.getPrice()%></p>
+                    <p></p>
+                    Description:
+                    <p class="lead"><%=item.getDescriptions()%></p>
+                    Quantity:
+                    <div class="input-group col-xs-3">
+                        <div class="input-group-btn">
+                            <button type="button" class="btn btn-default">
+                                <span>-</span>
+                            </button>
+                        </div>
+                        <input type="number" class="form-control" name="x" value="1">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button">+</button>
+                        </span>
+                    </div>
+                    <p></p>
+                    <button type="button" class="btn btn-default btn-block">Add to cart</button>
+                </div>
             </div>
         </div>
     </body>
