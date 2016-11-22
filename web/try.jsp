@@ -20,7 +20,7 @@
             <div class="row">
                 <%
                     ItemDB db = new ItemDB("jdbc:mysql://localhost:3306/ESD_Assignment", "root", "");
-                    ArrayList<ItemInfo> items = db.searchItemByInput("");
+                    ArrayList<ItemInfo> items = db.searchItemByInput("h");
                     for (ItemInfo item : items) {
                         if (item.getItemStatus().equalsIgnoreCase("AVAILABLE")) {
                 %>
