@@ -47,10 +47,11 @@ public class HandleItem extends HttpServlet {
             HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
         String name = request.getParameter("name");
-        if ("detail".equalsIgnoreCase(action)) {
+        if ("all".equalsIgnoreCase(action)) {
+            
+        } else if ("detail".equalsIgnoreCase(action)) {
             if (name!=null) {
                 ItemInfo item = db.queryItemDetail(name);
-                System.out.print("here");
                 request.setAttribute("item", item);
                 RequestDispatcher rd;
                 rd = getServletContext().getRequestDispatcher("/showItemDetail.jsp");

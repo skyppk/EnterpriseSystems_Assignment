@@ -34,22 +34,35 @@
                     <p></p>
                     Description:
                     <p class="lead"><%=item.getDescriptions()%></p>
-                    Quantity:
+                    <label for="quantity">Quantity: </label>
                     <div class="input-group col-xs-3">
                         <div class="input-group-btn">
-                            <button type="button" class="btn btn-default">
+                            <button type="button" class="btn btn-default" id="decrease">
                                 <span>-</span>
                             </button>
                         </div>
-                        <input type="number" class="form-control" name="x" value="1">
+                        <input type="number" class="form-control" id="quantity" name="quantity" value="1" min="1">
                         <span class="input-group-btn">
-                            <button class="btn btn-default" type="button">+</button>
+                            <button class="btn btn-default" type="button" id="increase">+</button>
                         </span>
                     </div>
                     <p></p>
-                    <button type="button" class="btn btn-default btn-block">Add to cart</button>
+                    <button type="button" class="btn btn-default btn-block">Add to cart</button>                    
                 </div>
             </div>
         </div>
+
+        <script>
+            $('#increase').click(function () {
+                var num = parseInt($('#quantity').val());
+                $('#quantity').val(num + 1);
+            });
+            $('#decrease').click(function () {
+                var num = parseInt($('#quantity').val());
+                if (num > 1) {
+                    $('#quantity').val(num - 1);
+                }
+            });
+        </script>
     </body>
 </html>

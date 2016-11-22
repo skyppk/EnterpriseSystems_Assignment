@@ -8,6 +8,7 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="cf.bean.ItemInfo"%>
 <%@page import="cf.db.ItemDB"%>
+<%@taglib uri="/WEB-INF/tlds/items" prefix="items" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -22,8 +23,9 @@
                 <%
                     ItemDB db = new ItemDB("jdbc:mysql://localhost:3306/ESD_Assignment", "root", "");
                     ArrayList<ItemInfo> items = db.selectAllItem();
-                    for (ItemInfo item : items) {
-                        if (item.getItemStatus().equalsIgnoreCase("AVAILABLE")) {
+                    if (items != null) {
+                        for (ItemInfo item : items) {
+                            if (item.getItemStatus().equalsIgnoreCase("AVAILABLE")) {
                 %>
                 <div class="col-sm-6 col-md-4">
                     <div class="thumbnail">
@@ -37,6 +39,7 @@
                     </div>
                 </div>
                 <%
+                            }
                         }
                     }
                 %>
