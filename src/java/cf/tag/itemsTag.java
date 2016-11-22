@@ -35,15 +35,8 @@ public class itemsTag extends SimpleTagSupport {
             if ("all".equalsIgnoreCase(tagType)) {
                 
             } else if ("list".equalsIgnoreCase(tagType)) {
-                // display the table format
-                for (CustomerBean customer : customers) {
-                    out.print("<ul>");
-                    out.print("<li>Custid:" + customer.getCustId() + "</li>");
-                    out.print("<li>Name:" + customer.getName() + "</li>");
-                    out.print("<li>Tel:" + customer.getTel() + "</li>");
-                    out.print("<li>Age:" + customer.getAge() + "</li>");
-                    out.print("</ul>");
-                }
+                
+                
             } else {
                 out.println("No such type");
             }
