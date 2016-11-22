@@ -150,7 +150,7 @@ public class UserDB {
             cnnct = getConnection();
             cnnct.setAutoCommit(false);
             stmt = cnnct.createStatement();
-            stmt.addBatch("UPDATE UserInfo SET login_id = '" + loginId + "' WHERE id = '" + id + "'");
+            stmt.addBatch("UPDATE UserInfo SET login_id = '" + loginId + "', user_status = 'ACCEPTED' WHERE id = '" + id + "'");
             stmt.addBatch("INSERT INTO AccountInfo VALUES ( '" + loginId + "','" + password + "',DEFAULT,DEFAULT,DEFAULT,DEFAULT)");
             int counts[] = stmt.executeBatch();
             cnnct.commit();
@@ -175,34 +175,38 @@ public class UserDB {
         return isSuccess;
     }
     
-//    public boolean addLoginInfo(String loginId, String pwd, int id) {
-//        Connection cnnct = null;
-//        PreparedStatement pStmnt = null;
-//        boolean isSuccess = false;
-//        try {
-//            cnnct = getConnection();
-//            String preQueryStatement = "UPDATE UserInfo SET login_id = ? , password = ? , bonusPoints = 1000 WHERE id = ? ";
-//            pStmnt = cnnct.prepareStatement(preQueryStatement);
-//            pStmnt.setString(1, loginId);
-//            pStmnt.setString(2, pwd);
-//            pStmnt.setInt(3, id);
-//            int rowCount = pStmnt.executeUpdate();
-//            if (rowCount >= 1) {
-//                isSuccess = true;
-//            }
-//            pStmnt.close();
-//            cnnct.close();
-//        } catch (SQLException ex) {
-//            while (ex != null) {
-//                ex.printStackTrace();
-//                ex = ex.getNextException();
-//            }
-//        } catch (IOException ex) {
-//            ex.printStackTrace();
-//        }
-//        return isSuccess;
-//    }
-
+    public boolean editUserInfo(int id,String lastName,String firstName, String sex, String birthday, String tel, String address, String email) {
+        Connection cnnct = null;
+        Statement stmt = null;
+        boolean isSuccess = false;
+        try {
+            cnnct = getConnection();
+            cnnct.setAutoCommit(false);
+            stmt = cnnct.createStatement();
+//            stmt.addBatch("UPDATE UserInfo SET login_id = '" + loginId + "' WHERE id = '" + id + "'");
+            int counts[] = stmt.executeBatch();
+            cnnct.commit();
+            System.out.println("Committed " + counts.length);
+            stmt.close();
+            cnnct.close();
+        } catch (SQLException ex) {
+            if(cnnct != null){
+                try{
+                    cnnct.rollback();
+                }catch(SQLException ex1){
+                    ex1.printStackTrace();
+                }
+            }
+            while (ex != null) {
+                ex.printStackTrace();
+                ex = ex.getNextException();
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        return isSuccess;
+    }
+    
 //    public boolean editRecord(CustomerBean cb){
 //        Connection cnnct = null;
 //        PreparedStatement pStmnt = null;

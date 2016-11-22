@@ -16,11 +16,11 @@ import cf.db.UserDB;
 public class CreateTable {
 
     public static void main(String[] arg) {
-//        String url = "jdbc:mysql://localhost:3306/ESD_Assignment";
-        String url = "jdbc:mysql://dev16.asuscomm.com:3306/ESD_Assignment";
+        String url = "jdbc:mysql://localhost:3306/ESD_Assignment";
+//        String url = "jdbc:mysql://dev16.asuscomm.com:3306/ESD_Assignment";
         String username = "root";
-//        String password = "";
-        String password = "root";
+        String password = "";
+//        String password = "root";
         UserDB userDb = new UserDB(url, username, password);
         ItemDB itemDb = new ItemDB(url, username, password);
         OrderDB orderDb = new OrderDB(url, username, password);
@@ -54,6 +54,10 @@ public class CreateTable {
 
         orderDb.addOrderInfo("o1", "syw", "prick", "2034-4-4", "PM", "pig street", 999.4);
         
+        
+        if(userDb.isValidUser("ting", "ting")){
+            System.out.println("Sus");
+        };
         
     }
 }
