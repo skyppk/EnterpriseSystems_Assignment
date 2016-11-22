@@ -39,11 +39,11 @@ public class itemsTag extends SimpleTagSupport {
                 for (ItemInfo item : items) {
                     out.println("<div class=\"col-sm-6 col-md-4\">");
                     out.println("<div class=\"thumbnail\">");
-                    out.println("<a href=\"product?action=detail&name="+item.getItemName()+"\">");
+                    out.println("<a href=\"product?action=detail&id="+item.getItemId()+"\">");
                     out.println("<img src=\"img/"+item.getImg()+"\" alt=\"No image\">");
                     out.println("<div class=\"caption\">");
                     out.println("<h4 style=\"white-space: nowrap; text-overflow: ellipsis; overflow:hidden;\">"+item.getItemName()+"</h4>");
-                    out.println("<p><%=item.getPrice()%></p>");
+                    out.println("<p>"+item.getPrice()+"</p>");
                     out.println("</div>");
                     out.println("</a>");
                     out.println("</div>");

@@ -47,7 +47,7 @@ public class HandleItem extends HttpServlet {
     protected void processRequest(HttpServletRequest request,
             HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
-        String name = request.getParameter("name");
+        String id = request.getParameter("id");
         if ("all".equalsIgnoreCase(action)) {
             ArrayList<ItemInfo> items = db.selectAvailableItem();
             request.setAttribute("items", items);
@@ -55,8 +55,8 @@ public class HandleItem extends HttpServlet {
             rd = getServletContext().getRequestDispatcher("/showItems.jsp");
             rd.forward(request, response);
         } else if ("detail".equalsIgnoreCase(action)) {
-            if (name != null) {
-                ItemInfo item = db.queryItemDetail(name);
+            if (id != null) {
+                ItemInfo item = db.queryItemDetail(id);
                 request.setAttribute("item", item);
                 RequestDispatcher rd;
                 rd = getServletContext().getRequestDispatcher("/showItemDetail.jsp");
