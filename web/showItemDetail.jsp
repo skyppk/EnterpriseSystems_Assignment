@@ -75,16 +75,18 @@
                 });
                 
                 function addToCart(obj){
-                    tmpstr = getCookie('shoppingCart');
-                    shoppingCart = [];
-                    if(tmpstr != '')
-                        shoppingCart = JSON.parse(tmpstr);
-                    console.log(shoppingCart);
-                    shoppingCart.push(obj);
-                    setCookie('shoppingCart', JSON.stringify(shoppingCart), 365);
+                    $.post( "ShoppingCartServlet", obj );
+                    /**
+                        tmpstr = atob(getCookie('shoppingCart'));
+                        shoppingCart = [];
+                        if(tmpstr != '')
+                            shoppingCart = JSON.parse(tmpstr);
+                        console.log(shoppingCart);
+                        shoppingCart.push(obj);
+                        setCookie('shoppingCart', btoa(JSON.stringify(shoppingCart)), 365);**/
                 }
             });
-            function getCookie(cname) {
+            /**function getCookie(cname) {
                 var name = cname + "=";
                 var ca = document.cookie.split(';');
                 for(var i = 0; i <ca.length; i++) {
@@ -103,7 +105,7 @@
                 d.setTime(d.getTime() + (exdays*24*60*60*1000));
                 var expires = "expires="+d.toUTCString();
                 document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-            }
+            }**/
         </script>
     </body>
 </html>
