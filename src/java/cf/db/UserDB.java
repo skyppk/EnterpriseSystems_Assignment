@@ -295,4 +295,56 @@ public class UserDB {
         }
         return isValid;
     }
+    
+    public boolean dropUserInfoTable(){
+        Connection cnnct = null;
+        PreparedStatement pStmnt = null;
+        boolean isSuccess = false;
+        try{
+            cnnct = getConnection();
+            String preQueryStatement = "DROP TABLE UserInfo ";
+            pStmnt = cnnct.prepareStatement(preQueryStatement);
+            
+            int rowCount = pStmnt.executeUpdate();
+            if(rowCount >= 1){
+                isSuccess = true;
+            }
+            pStmnt.close();
+            cnnct.close();
+        } catch (SQLException ex){
+            while(ex != null){
+                ex.printStackTrace();
+                ex = ex.getNextException();
+            }
+        } catch (IOException ex){
+            ex.printStackTrace();
+        }
+        return isSuccess;
+    }
+    
+    public boolean dropAccountInfoTable(){
+        Connection cnnct = null;
+        PreparedStatement pStmnt = null;
+        boolean isSuccess = false;
+        try{
+            cnnct = getConnection();
+            String preQueryStatement = "DROP TABLE AccountInfo ";
+            pStmnt = cnnct.prepareStatement(preQueryStatement);
+            
+            int rowCount = pStmnt.executeUpdate();
+            if(rowCount >= 1){
+                isSuccess = true;
+            }
+            pStmnt.close();
+            cnnct.close();
+        } catch (SQLException ex){
+            while(ex != null){
+                ex.printStackTrace();
+                ex = ex.getNextException();
+            }
+        } catch (IOException ex){
+            ex.printStackTrace();
+        }
+        return isSuccess;
+    }
 }

@@ -138,4 +138,56 @@ public class OrderDB {
         }
         return isSuccess;
     }
+    
+    public boolean dropOrderInfoTable(){
+        Connection cnnct = null;
+        PreparedStatement pStmnt = null;
+        boolean isSuccess = false;
+        try{
+            cnnct = getConnection();
+            String preQueryStatement = "DROP TABLE OrderInfo ";
+            pStmnt = cnnct.prepareStatement(preQueryStatement);
+            
+            int rowCount = pStmnt.executeUpdate();
+            if(rowCount >= 1){
+                isSuccess = true;
+            }
+            pStmnt.close();
+            cnnct.close();
+        } catch (SQLException ex){
+            while(ex != null){
+                ex.printStackTrace();
+                ex = ex.getNextException();
+            }
+        } catch (IOException ex){
+            ex.printStackTrace();
+        }
+        return isSuccess;
+    }
+    
+    public boolean dropOrderDetailsTable(){
+        Connection cnnct = null;
+        PreparedStatement pStmnt = null;
+        boolean isSuccess = false;
+        try{
+            cnnct = getConnection();
+            String preQueryStatement = "DROP TABLE OrderDetails ";
+            pStmnt = cnnct.prepareStatement(preQueryStatement);
+            
+            int rowCount = pStmnt.executeUpdate();
+            if(rowCount >= 1){
+                isSuccess = true;
+            }
+            pStmnt.close();
+            cnnct.close();
+        } catch (SQLException ex){
+            while(ex != null){
+                ex.printStackTrace();
+                ex = ex.getNextException();
+            }
+        } catch (IOException ex){
+            ex.printStackTrace();
+        }
+        return isSuccess;
+    }
 }

@@ -140,4 +140,30 @@ public class StaffDB {
         }
         return staff;
     }
+    
+    public boolean dropStaffInfoTable(){
+        Connection cnnct = null;
+        PreparedStatement pStmnt = null;
+        boolean isSuccess = false;
+        try{
+            cnnct = getConnection();
+            String preQueryStatement = "DROP TABLE StaffInfo ";
+            pStmnt = cnnct.prepareStatement(preQueryStatement);
+            
+            int rowCount = pStmnt.executeUpdate();
+            if(rowCount >= 1){
+                isSuccess = true;
+            }
+            pStmnt.close();
+            cnnct.close();
+        } catch (SQLException ex){
+            while(ex != null){
+                ex.printStackTrace();
+                ex = ex.getNextException();
+            }
+        } catch (IOException ex){
+            ex.printStackTrace();
+        }
+        return isSuccess;
+    }
 }
