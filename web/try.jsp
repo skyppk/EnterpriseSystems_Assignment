@@ -5,8 +5,8 @@
 --%>
 
 <%@page import="java.util.ArrayList"%>
-<%@page import="cf.bean.ItemInfo"%>
-<%@page import="cf.db.ItemDB"%>
+<%@page import="cf.bean.*"%>
+<%@page import="cf.db.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -20,6 +20,8 @@
             <div class="row">
                 <%
                     ItemDB db = new ItemDB("jdbc:mysql://localhost:3306/ESD_Assignment", "root", "");
+                    UserDB ub = new UserDB("jdbc:mysql://localhost:3306/ESD_Assignment", "root", "");
+                    UserInfo ui = ub.getUserInfo("ting", "ting");
                     ArrayList<ItemInfo> items = db.searchItemByInput("h");
                     for (ItemInfo item : items) {
                         if (item.getItemStatus().equalsIgnoreCase("AVAILABLE")) {
@@ -35,6 +37,10 @@
                         </a>
                     </div>
                 </div>
+                            <div>
+                                <%=ui.getLoginId()%>
+                                <%=ui.getAddress()%>
+                            </div>
                 <%
                         }
                     }

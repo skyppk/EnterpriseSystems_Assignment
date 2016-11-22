@@ -5,12 +5,14 @@
  */
 package cf.db;
 
+import cf.bean.OrderDetails;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 /**
  *
@@ -89,8 +91,8 @@ public class OrderDB {
                     + "item_id varchar(30) NOT NULL,"
                     + "item_name varchar(50) NOT NULL,"
                     + "quantity int NOT NULL,"
-                    + "buy_price double,"
-                    + "details_price double,"
+                    + "buy_price double NOT NULL,"
+                    + "details_price double NOT NULL,"
                     + "PRIMARY KEY (id)"
                     + ");";
             stmnt.execute(sql);
@@ -106,29 +108,63 @@ public class OrderDB {
         } 
     }
     
-    public boolean addOrderInfo(String orderId, String loginId, String deliveryType, String deliverDate, String deliveryTime, String deliveryAddress, double orderPrice){
+    public boolean addOrderInfo(String orderId, String loginId, String deliveryType, String deliveryDate, String deliveryTime, String deliveryAddress, double orderPrice, ArrayList<OrderDetails> orderDetails){
         Connection cnnct = null;
+        Statement stmt = null;
         PreparedStatement pStmnt = null;
         boolean isSuccess = false;
         try{
             cnnct = getConnection();
-            String preQueryStatement = "INSERT INTO OrderInfo VALUES (null,?,?,?,?,?,?,?,DEFAULT,DEFAULT)";
-            pStmnt = cnnct.prepareStatement(preQueryStatement);
-            pStmnt.setString(1, orderId);
-            pStmnt.setString(2, loginId);
-            pStmnt.setString(3, deliveryType);
-            pStmnt.setString(4, deliverDate);
-            pStmnt.setString(5, deliveryTime);
-            pStmnt.setString(6, deliveryAddress);
-            pStmnt.setDouble(7, orderPrice);
-//            pStmnt.setString(8, "AVAILABLE");
-            int rowCount = pStmnt.executeUpdate();
-            if(rowCount >= 1){
-                isSuccess = true;
+            cnnct.setAutoCommit(false);
+            stmt = cnnct.createStatement();
+            stmt.addBatch("INSERT INTO OrderInfo VALUES (null,'" + orderId + "','" + loginId + "','" + deliveryType + "','" + deliveryDate + "','" + deliveryTime + "','" + deliveryAddress + "','" + orderPrice + "',DEFAULT,DEFAULT)");
+            if(orderDetails.isEmpty()){
+                throw new SQLException();
             }
-            pStmnt.close();
+            for(int i = 0; i < orderDetails.size();i++){
+                OrderDetails od = orderDetails.get(i);
+                stmt.addBatch("INSERT INTO OrderDetails VALUES (null,'" + orderId + "','" + od.getItemId() + "','" + od.getItemName() + "','" + od.getQuantity() + "','" + od.getBuyPrice() + "','" + od.getDetailsPrice() + "')");
+            }
+            
+            int counts[] = stmt.executeBatch();
+            System.out.println("Order Details :" + counts.length);
+//            String preQueryStatement = "INSERT INTO OrderInfo VALUES (null,?,?,?,?,?,?,?,DEFAULT,DEFAULT)";
+//            pStmnt = cnnct.prepareStatement(preQueryStatement);
+//            pStmnt.setString(1, orderId);
+//            pStmnt.setString(2, loginId);
+//            pStmnt.setString(3, deliveryType);
+//            pStmnt.setString(4, deliveryDate);
+//            pStmnt.setString(5, deliveryTime);
+//            pStmnt.setString(6, deliveryAddress);
+//            pStmnt.setDouble(7, orderPrice);
+//            pStmnt.addBatch();
+//            String preQueryStatement2 = "INSERT INTO OrderDetails VALUES (null,?,?,?,?,?,?)";
+//            for(int i =0; i < orderDetails.size();i++){
+//                OrderDetails od = orderDetails.get(i);
+//                pStmnt = cnnct.prepareStatement(preQueryStatement2);
+//                pStmnt.setString(1, orderId);
+//                pStmnt.setString(2, od.getItemId());
+//                pStmnt.setString(3, od.getItemName());
+//                pStmnt.setInt(4, od.getQuantity());
+//                pStmnt.setDouble(5, od.getBuyPrice());
+//                pStmnt.setDouble(6, od.getDetailsPrice());
+//                pStmnt.addBatch();
+//            }
+//            int[] rowCount = pStmnt.executeBatch();
+//            System.out.println("Order Details :" + rowCount.length);
+            cnnct.commit();
+//            pStmnt.close();
             cnnct.close();
+            isSuccess = true;
+            
         } catch (SQLException ex){
+            if(cnnct != null){
+                try{
+                    cnnct.rollback();
+                }catch(SQLException ex1){
+                    ex1.printStackTrace();
+                }
+            }
             while(ex != null){
                 ex.printStackTrace();
                 ex = ex.getNextException();
@@ -138,6 +174,8 @@ public class OrderDB {
         }
         return isSuccess;
     }
+    
+    
     
     public boolean dropOrderInfoTable(){
         Connection cnnct = null;
