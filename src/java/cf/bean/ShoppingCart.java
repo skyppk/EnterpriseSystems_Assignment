@@ -12,22 +12,22 @@ import java.util.ArrayList;
  * @author apple
  */
 public class ShoppingCart {
-    ArrayList<OrderDetails> orderDetails;
+    ArrayList<OrderDetails> cart;
 
     public ShoppingCart() {
-        orderDetails = new ArrayList();
+        cart = new ArrayList();
     }
 
-    public ShoppingCart(ArrayList<OrderDetails> orderDetails) {
-        this.orderDetails = orderDetails;
+    public ShoppingCart(ArrayList<OrderDetails> cart) {
+        this.cart = cart;
     }
 
-    public ArrayList<OrderDetails> getOrderDetails() {
-        return orderDetails;
+    public ArrayList<OrderDetails> getCart() {
+        return cart;
     }
 
-    public void setOrderDetails(ArrayList<OrderDetails> orderDetails) {
-        this.orderDetails = orderDetails;
+    public void setCart(ArrayList<OrderDetails> cart) {
+        this.cart = cart;
     }
     
     

@@ -5,9 +5,12 @@
  */
 package cf.createTable;
 
+import cf.bean.ItemInfo;
+import cf.bean.OrderDetails;
 import cf.db.ItemDB;
 import cf.db.OrderDB;
 import cf.db.UserDB;
+import java.util.ArrayList;
 
 /**
  *
@@ -16,11 +19,11 @@ import cf.db.UserDB;
 public class CreateTable {
 
     public static void main(String[] arg) {
-//        String url = "jdbc:mysql://localhost:3306/ESD_Assignment";
-        String url = "jdbc:mysql://dev16.asuscomm.com:3306/ESD_Assignment";
+        String url = "jdbc:mysql://localhost:3306/ESD_Assignment";
+//        String url = "jdbc:mysql://dev16.asuscomm.com:3306/ESD_Assignment";
         String username = "root";
-//        String password = "";
-        String password = "root";
+        String password = "";
+//        String password = "root";
         UserDB userDb = new UserDB(url, username, password);
         ItemDB itemDb = new ItemDB(url, username, password);
         OrderDB orderDb = new OrderDB(url, username, password);
@@ -51,9 +54,21 @@ public class CreateTable {
         userDb.addUserInfo("Wong", "Shuk Yan", "F", "1995-9-2", "34329483", "pig street", "sywispig@gmail.com");
         userDb.addUserAccountInfo(1, "ting", "ting");
 //        addOrderInfo(String orderId, String loginId, String deliveryType, String deliverDate, String deliveryTime, String deliveryAddress, double orderPrice)
-
-        orderDb.addOrderInfo("o1", "syw", "prick", "2034-4-4", "PM", "pig street", 999.4);
+        ArrayList<OrderDetails> orderDetails = new ArrayList();
+        ArrayList<OrderDetails> orderDetails2 = new ArrayList();
+        ArrayList<ItemInfo> items = itemDb.selectAvailableItem();
+        for(int i = 0; i < items.size(); i++){
+            ItemInfo item = items.get(i);
+            OrderDetails od = new OrderDetails(item.getItemId(),item.getItemName(),2,item.getPrice(),2 * item.getPrice());
+            orderDetails.add(od);
+        }
+        orderDb.addOrderInfo("o1", "syw", "prick", "2034-4-4", "PM", "pig street", 999.4,orderDetails);
+        orderDb.addOrderInfo("o2", "syw", "prick", "2034-4-4", "PM", "pig street", 999.4,orderDetails2);
         
+        
+        if(userDb.isValidUser("ting", "ting")){
+            System.out.println("Sus");
+        };
         
     }
 }
