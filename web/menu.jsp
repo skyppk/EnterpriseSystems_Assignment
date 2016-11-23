@@ -104,7 +104,7 @@
             <li><a href="">Adventures</a></li>
             <li><a href="">Promotions</a></li>
             <li><a href="">Updates</a></li>
-
+            
         </ul>
     </div>
 </div>
