@@ -285,12 +285,16 @@ public class ItemDB {
             rs = pStmnt.executeQuery();
             if (rs.next()) {
                 item = new ItemInfo();
-                item.setCategory(rs.getString("category"));
-                item.setDescriptions(rs.getString("descriptions"));
-                item.setDesignerName(rs.getString("designer_name"));
-                item.setImg(rs.getString("img"));
+                item.setId(rs.getInt("id"));
+                item.setItemId(rs.getString("item_id"));
                 item.setItemName(rs.getString("item_name"));
+                item.setCategory(rs.getString("category"));
+                item.setDesignerName(rs.getString("designer_name"));
                 item.setPrice(rs.getDouble("price"));
+                item.setDescriptions(rs.getString("descriptions"));
+                item.setImg(rs.getString("img"));
+                item.setItemStatus(rs.getString("item_status"));
+                
             }
             pStmnt.close();
             cnnct.close();

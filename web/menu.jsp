@@ -67,7 +67,7 @@
                         
             <% if (userInfo.getLoginId() == null || userInfo.getLoginId().equals("")) {%>
             <ul class="nav navbar-nav navbar-right">
-
+                <li><a href="cart.jsp"><span class="glyphicon glyphicon-shopping-cart"></span> Shopping Cart</a></li>
                 <li><a href="registration.jsp"><span class="glyphicon glyphicon-user"></span> Registration</a></li>
                 <li><a href="login.jsp"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
             </ul>
